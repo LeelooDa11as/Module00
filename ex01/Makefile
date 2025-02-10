@@ -4,7 +4,7 @@ F_OBJ = obj/
 OBJ = $(addprefix $(F_OBJ), $(SRC:.cpp=.o))
 DEP = $(addprefix $(F_OBJ), $(SRC:.cpp=.d))
 CC = c++
-C_FLAGS = -Wall -Wextra -Werror -MMD -std=c++98 ##leaks --atExit --
+C_FLAGS = -Wall -Wextra -Werror -MMD -std=c++98 -g -fsanitize=address
 
 # color codes
 BLACK    =   \033[0;39m

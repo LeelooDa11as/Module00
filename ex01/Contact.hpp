@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
@@ -16,7 +17,7 @@ class Contact {
         void    set_nickname(void);
         void    set_phone_number(void);
         void    set_darkest_secret(void);
-        //getters
+        
         //show all information of one contact
         void    show_contact(void) const;
         //shows the whole list of saved contacts
