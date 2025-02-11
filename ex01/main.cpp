@@ -28,9 +28,15 @@ int	main(int ac, char *av[])
 			std::cout << GREEN <<"Thank you for using this PhoneBook" << GREEN <<std::endl;
 			run = false;
 		}
+		else if (std::cin.eof()) // NEW: Check if EOF is detected
+    	{
+        	std::cout << "\nEOF detected. Exiting PhoneBook...\n";
+        	exit(1);
+    	}
 		command.clear();
 		if (run)
 			PhoneBook.show_instructions();
+		
 	}
 	return (0);
 }

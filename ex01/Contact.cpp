@@ -80,8 +80,8 @@ void 	Contact::set_nickname(void) {
     return;
 }
 
-
-void 	Contact::set_phone_number(void) {
+//Version that does not check if it is numerical
+/*void 	Contact::set_phone_number(void) {
     std::string	info;
 
 	std::cout << "Provide phone number:" << std::endl;
@@ -93,7 +93,34 @@ void 	Contact::set_phone_number(void) {
     }
     this->_phone_number = info;
     return;
+}*/
+
+void Contact::set_phone_number(void) {
+    std::string info;
+
+    std::cout << "Provide phone number:" << std::endl;
+    while (true) {
+        std::getline(std::cin, info);
+        if (info.empty()) {
+            std::cout << "Phone number cannot be empty! Try again:" << std::endl;
+            continue;
+        }
+        bool valid = true;
+        for (size_t i = 0; i < info.length(); i++) {
+            if (!isdigit(info[i])) {
+                valid = false;
+                break;
+            }
+        }
+        if (!valid) {
+            std::cout << "Invalid phone number! Only digits are allowed. Try again:" << std::endl;
+            continue;
+        }
+        this->_phone_number = info;
+        break;
+    }
 }
+
 
 
 void 	Contact::set_darkest_secret(void) {
@@ -115,5 +142,3 @@ bool	Contact::is_empty(void) const {
 		return (true);
 	return (false);
 }
-
-

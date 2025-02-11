@@ -50,6 +50,56 @@ void PhoneBook::search(void) {
     }
     std::cout << "|-------------------------------------------|" << std::endl;
 
+    while (true) {
+        std::cout << "Choose a contact by index (1-8) or 0 to return to PhoneBook: ";
+        std::cout << std::endl;  // <-- THIS LINE WAS MISSING BEFORE, NOW IT'S BACK!
+
+        if (!(std::cin >> index)) {  // NEW CODE: Check for EOF and input failure
+            if (std::cin.eof()) {  // NEW CODE: Detect Ctrl+D
+                std::cout << "\nEOF detected. Exiting search...\n";  // NEW CODE
+                std::cin.clear();  // NEW CODE: Clear error flag
+                return;  // NEW CODE: Exit function
+            }
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            std::cout << "Invalid input! Please enter a number between 0 and 8." << std::endl;
+            continue;
+        }
+
+        std::cin.ignore(10000, '\n');
+
+        if (index < 0 || index > 8) {
+            std::cout << "Out of range! Please enter a number between 0 and 8." << std::endl;
+            continue;
+        }
+
+        break;
+    }
+
+    if (index != 0) {
+        if (this->_contacts[index - 1].is_empty())
+            std::cout << "Sorry, it appears that this contact is still empty" << std::endl;
+        else
+            this->_contacts[index - 1].show_contact();
+    }
+}
+
+
+/*
+void PhoneBook::search(void) {
+    int index;
+
+    std::cout << "|-------------------------------------------|" << std::endl;
+    std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
+    std::cout << "|----------|----------|----------|----------|" << std::endl;
+    for (int i = 0; i < 8; i++) {
+        if (this->_contacts[i].is_empty())
+            break;
+        std::cout << "|" << std::setw(10) << std::right << i + 1;
+        this->_contacts[i].show_contact_list();
+    }
+    std::cout << "|-------------------------------------------|" << std::endl;
+
     // Main loop for accepting valid input
     while (true) {
         std::cout << "Choose a contact by index (1-8) or 0 to return to PhoneBook: ";
@@ -90,9 +140,10 @@ void PhoneBook::search(void) {
 		else
             this->_contacts[index - 1].show_contact();
     }
-}
+}*/
 
 
+//Version that does not protect Control D
 /*void	PhoneBook::search(void) {
 	// std::string input;
 	int	index;
